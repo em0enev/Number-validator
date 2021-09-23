@@ -3,10 +3,10 @@ import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
-  let isValid;
+  const [valid, setValid] = useState(false);
 
   useMemo(() => {
-    isValid = isTextNumber(text)
+    isTextNumber(text)
   }, [text])
 
   return (
@@ -20,7 +20,7 @@ function App() {
           onChange={(e) => setText(e.target.value)}
         />
         <span className="icon is-small is-right">
-          <i className={isValid ? "fas fa-check" : "fas fa-times"} />
+          <i className={valid ? "fas fa-check" : "fas fa-times"} />
         </span>
       </div>
     </div>
@@ -29,7 +29,7 @@ function App() {
 
   function isTextNumber(text) {
     const reg = new RegExp("^\\d+$")
-    return reg.test(text)
+    setValid(reg.test(text))
   }
 }
 
